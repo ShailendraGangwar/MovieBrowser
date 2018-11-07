@@ -25,6 +25,8 @@ struct MBStringConstants {
     static let movieListTopic = "love"
     static let featuredListTopic = "war"
     static let notFoundIcon = "not_found_icon"
+    static let movieReleaseYear = "Release year: "
+    static let movieImdbId = "IMDB Id: "
 }
 
 /**

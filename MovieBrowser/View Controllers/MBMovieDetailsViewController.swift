@@ -25,7 +25,7 @@ class MBDetailsViewController: UIViewController {
     // MARK: -
     
     /// Movie details presenter
-    private let movieDetailsPresenter = MBMoviesDetailViewPresenter()
+    var movieDetailsPresenter : MBMoviesDetailViewPresenter?
     /// Current movie
     var movie: MBMovie!
     /// Movie image
@@ -36,11 +36,15 @@ class MBDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.movieDetailsPresenter.movieDetailsHelper = self
-        self.movieDetailsPresenter.movieDetailsPresenter = self
+        // Setting delegates
+        self.movieDetailsPresenter = MBMoviesDetailViewPresenter()
+        self.movieDetailsPresenter?.movieDetailsHelper = self
+        self.movieDetailsPresenter?.movieDetailsPresenter = self
+        // Fetch movie details
         if let _ = movie {
-            self.movieDetailsPresenter.getDetailsForMovie(movie: movie)
+            self.movieDetailsPresenter?.getDetailsForMovie(movie: movie)
         }
+        // setting navigation bar
         self.setUpNavigationBar()
     }
     
@@ -59,6 +63,7 @@ class MBDetailsViewController: UIViewController {
         self.navigationController?.view.backgroundColor = UIColor.white
         self.navigationController?.view.tintColor = UIColor.black
         self.navigationItem.title = movie?.title
+        // back button
         let backButton = UIBarButtonItem()
         backButton.title = MBStringConstants.backButtonTitle
         self.navigationController?.navigationBar.topItem?.backBarButtonItem = backButton
@@ -68,7 +73,7 @@ class MBDetailsViewController: UIViewController {
      Fetch Movie details
      */
     private func fetchMovieDetails() {
-        self.movieDetailsPresenter.getDetailsForMovie(movie: self.movie)
+        self.movieDetailsPresenter?.getDetailsForMovie(movie: self.movie)
     }
     
     /**
@@ -81,6 +86,7 @@ class MBDetailsViewController: UIViewController {
                 self.imageView.image = movieImage
             }
         } else {
+            // fetch image poster if image is nil
             DispatchQueue.global().async {
                 do {
                     let imageData = try Data.init(contentsOf: (movie?.poster)!)
@@ -88,6 +94,7 @@ class MBDetailsViewController: UIViewController {
                         self.imageView.image = UIImage.init(data: imageData)
                     }
                 } catch {
+                    // show not found image
                     DispatchQueue.main.async {
                         self.imageView.image = UIImage.init(named: MBStringConstants.notFoundIcon)
                     }
@@ -95,12 +102,13 @@ class MBDetailsViewController: UIViewController {
                 }
             }
         }
+        // Setting view labels
         if let movie = movie {
             DispatchQueue.main.async {
                 self.movieDescription.text = movie.plot ?? ""
                 self.movie.plot = movie.plot
-                self.movieImdbId.text = "IMDB Id: \(movie.imdbId)"
-                self.movieReleaseYear.text = "Release year: \(movie.year)"
+                self.movieImdbId.text = "\(MBStringConstants.movieImdbId)\(movie.imdbId)"
+                self.movieReleaseYear.text = "\(MBStringConstants.movieReleaseYear)\(movie.year)"
             }
         }
     }

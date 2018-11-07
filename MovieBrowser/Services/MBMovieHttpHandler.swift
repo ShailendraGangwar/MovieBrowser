@@ -15,14 +15,22 @@ import Foundation
 class MBMovieHttpHandler {
     
     /// Url session
-    static let session = URLSession.shared
+    private let session: URLSession
+    
+    /**
+     Initializer.
+     - Parameter session: Url session.
+     */
+    init(session: URLSession) {
+        self.session = session
+    }
     
     /**
      Get movies list.
      - Parameter topic: topic to be searched for movies.
      - Parameter completion: completion block.
      */
-    static func getMovies(topic: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
+    func getMovies(topic: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
         session.dataTask(with: URL(string: "\(MBUrls.movieListURL)\(topic)")!, completionHandler: { (data, response, error) in
             if let error = error {
                 completion(error, [])
@@ -44,7 +52,7 @@ class MBMovieHttpHandler {
      - Parameter topic: topic to be searched for movies.
      - Parameter completion: completion block.
      */
-    static func getFeatureMovies(topic: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
+    func getFeatureMovies(topic: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
         session.dataTask(with: URL(string: "\(MBUrls.featuredURL)\(topic)")!, completionHandler: { (data, response, error) in
             if let error = error {
                 completion(error, [])
@@ -65,7 +73,7 @@ class MBMovieHttpHandler {
      - Parameter movie: movie to be searched.
      - Parameter completion: completion block.
      */
-    static func getDetailsFor(movie: String, completion: @escaping (Error?, MBMovie?) -> Void) {
+    func getDetailsFor(movie: String, completion: @escaping (Error?, MBMovie?) -> Void) {
         session.dataTask(with: URL(string: "\(MBUrls.titleSearchURL)\(movie)")!, completionHandler: { (data, response, error) in
             if let error = error {
                 completion(error, nil)

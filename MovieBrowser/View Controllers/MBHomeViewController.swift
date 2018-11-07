@@ -37,12 +37,17 @@ class MBHomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // View title
         self.title = MBStringConstants.titleHomeView
+        // Attaching presenter
         MBHomeViewRouter.attachHomePresenter(homeView: self)
+        // Tableview datasource and delegate
         self.movieListTableView.delegate = self
         self.movieListTableView.dataSource = self
+        // Fetrch movies list
         self.movieListPresenter?.getMoviesForTableList()
         self.movieListPresenter?.getFeaturedMovies()
+        // Setting delegate for selectionon featured movie.
         self.featuredListView.movieListActionDelegate = self
     }
     
@@ -81,7 +86,7 @@ extension MBHomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: MBStringConstants.movieTableCell, for: indexPath) as! MBMovieTableCell
         let movie = moviesList[indexPath.row]
-        cell.selectionStyle = .none
+        // configure cell
         configureMovie(movie: movie, forCell: cell)
         return cell
     }
@@ -92,6 +97,7 @@ extension MBHomeViewController: UITableViewDataSource {
      - Parameter cell: table view cell
      */
     func configureMovie(movie: MBMovie, forCell cell: MBMovieTableCell) {
+        cell.selectionStyle = .none
         DispatchQueue.global().async {
             do {
                 let imageData = try Data.init(contentsOf: movie.poster)
@@ -119,6 +125,7 @@ extension MBHomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let currentCell = tableView.cellForRow(at: indexPath) as! MBMovieTableCell
+        // show details for the movie
         self.movieListPresenter?.showDetailsfor(
             movie: moviesList[indexPath.row],
             movieImage: currentCell.imageView?.image,
@@ -165,6 +172,7 @@ extension MBHomeViewController: MBMovieHelperProtocol {
 
 extension MBHomeViewController: MBFeaturedListActionProtocol {
     func itemSelectedWith(movie: MBMovie?, movieImage: UIImage?) {
+        // show details for the movie
         self.movieListPresenter?.showDetailsfor(
             movie: movie,
             movieImage: movieImage,

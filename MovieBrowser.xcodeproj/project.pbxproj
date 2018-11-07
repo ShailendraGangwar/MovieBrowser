@@ -12,7 +12,6 @@
 		DA8C19C42190396E001098BB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8C19C22190396E001098BB /* Main.storyboard */; };
 		DA8C19C62190396F001098BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA8C19C52190396F001098BB /* Assets.xcassets */; };
 		DA8C19C92190396F001098BB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA8C19C72190396F001098BB /* LaunchScreen.storyboard */; };
-		DA8C19D42190396F001098BB /* MovieBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C19D32190396F001098BB /* MovieBrowserTests.swift */; };
 		DA8C19DF2190396F001098BB /* MovieBrowserUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C19DE2190396F001098BB /* MovieBrowserUITests.swift */; };
 		DA8C19F1219088C0001098BB /* MBMovieTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C19F0219088C0001098BB /* MBMovieTableCell.swift */; };
 		DA8C19F321908F57001098BB /* MBMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C19F221908F57001098BB /* MBMovie.swift */; };
@@ -31,6 +30,7 @@
 		DA8C1A182192AC5C001098BB /* MBFeaturedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C1A172192AC5C001098BB /* MBFeaturedListView.swift */; };
 		DA8C1A1A2192AC82001098BB /* MBFeaturedListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA8C1A192192AC82001098BB /* MBFeaturedListView.xib */; };
 		DA8C1A1D2192BAF6001098BB /* MBMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA8C1A1B2192B20D001098BB /* MBMovieCollectionViewCell.xib */; };
+		DAA5022521930FB000F405AB /* MBHomeViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAA5022421930FB000F405AB /* MBHomeViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,7 +59,6 @@
 		DA8C19C82190396F001098BB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA8C19CA2190396F001098BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA8C19CF2190396F001098BB /* MovieBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DA8C19D32190396F001098BB /* MovieBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowserTests.swift; sourceTree = "<group>"; };
 		DA8C19D52190396F001098BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA8C19DA2190396F001098BB /* MovieBrowserUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieBrowserUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA8C19DE2190396F001098BB /* MovieBrowserUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieBrowserUITests.swift; sourceTree = "<group>"; };
@@ -81,6 +80,7 @@
 		DA8C1A172192AC5C001098BB /* MBFeaturedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBFeaturedListView.swift; sourceTree = "<group>"; };
 		DA8C1A192192AC82001098BB /* MBFeaturedListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MBFeaturedListView.xib; sourceTree = "<group>"; };
 		DA8C1A1B2192B20D001098BB /* MBMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MBMovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		DAA5022421930FB000F405AB /* MBHomeViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBHomeViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,8 +151,8 @@
 		DA8C19D22190396F001098BB /* MovieBrowserTests */ = {
 			isa = PBXGroup;
 			children = (
-				DA8C19D32190396F001098BB /* MovieBrowserTests.swift */,
 				DA8C19D52190396F001098BB /* Info.plist */,
+				DAA5022421930FB000F405AB /* MBHomeViewControllerTests.swift */,
 			);
 			path = MovieBrowserTests;
 			sourceTree = "<group>";
@@ -429,7 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DA8C19D42190396F001098BB /* MovieBrowserTests.swift in Sources */,
+				DAA5022521930FB000F405AB /* MBHomeViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

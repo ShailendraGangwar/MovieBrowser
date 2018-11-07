@@ -15,20 +15,24 @@ import Foundation
  - Getting movie details
  */
 class MBMovieAPIService {
+    
     /// shared variable
     static let shared = MBMovieAPIService()
-    
+    /// http handler
+    var movieHttpHandler: MBMovieHttpHandler?
     /**
      Initializer
      */
-    private init() {}
+    private init() {
+        movieHttpHandler = MBMovieHttpHandler(session: URLSession.shared)
+    }
     
     /**
      Get movies list.
      - Parameter topic: Topic to be searched.
      */
     func getMoviesList(topic: String) {
-        MBMovieHttpHandler.getMovies(topic: topic) { (error, movies) in
+        movieHttpHandler?.getMovies(topic: topic) { (error, movies) in
             MBMoviesListDataManager.shared.saveMoviesList(moviesList: movies!, error: error)
         }
     }
@@ -38,7 +42,7 @@ class MBMovieAPIService {
      - Parameter topic: Topic to be searched.
      */
     func getfeatureMoviesList(topic: String) {
-        MBMovieHttpHandler.getFeatureMovies(topic: topic) { (error, movies) in
+        movieHttpHandler?.getFeatureMovies(topic: topic) { (error, movies) in
             MBMoviesListDataManager.shared.saveFeaturedList(featuredList: movies!, error: error)
         }
     }
@@ -49,7 +53,7 @@ class MBMovieAPIService {
      - Parameter completion: Completion block.
      */
     func getDetailsFor(movieTitle: String, completion: @escaping (Error?, MBMovie?) -> Void) {
-        MBMovieHttpHandler.getDetailsFor(movie: movieTitle) { (error, movie) in
+        movieHttpHandler?.getDetailsFor(movie: movieTitle) { (error, movie) in
             completion(error, movie)
         }
     }
