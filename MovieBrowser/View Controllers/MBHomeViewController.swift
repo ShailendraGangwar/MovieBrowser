@@ -12,12 +12,18 @@ class MBHomeViewController: UIViewController {
     
     // MARK: - IBOutlets
     // MARK: -
+    
+    /// Movie list table view
     @IBOutlet weak var movieListTableView: UITableView!
+    /// Featured list view
     @IBOutlet weak var featuredListView: MBFeaturedListView!
+    
     // MARK: - Variables
     // MARK: -
+    
+    /// Movie list presenter
     var movieListPresenter : MBHomeViewPresenter?
-    var scrollingTimer = Timer()
+    /// Movies list
     private var moviesList = [MBMovie]() {
         didSet {
             DispatchQueue.main.async {
@@ -25,11 +31,13 @@ class MBHomeViewController: UIViewController {
             }
         }
     }
+    
     // MARK: - Life cycle methods
     // MARK: -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = StringConstants.titleHomeView
+        self.title = MBStringConstants.titleHomeView
         MBHomeViewRouter.attachHomePresenter(homeView: self)
         self.movieListTableView.delegate = self
         self.movieListTableView.dataSource = self
@@ -42,18 +50,28 @@ class MBHomeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     // MARK: - Custom mehtods
     // MARK: -
+    
+    /**
+     Hide Loader
+     */
     private func hideLoader() {
         MBLoader().hideOverlayView(view: self.view)
     }
     
+    /**
+     Show Loader
+     */
     private func showLoader() {
         MBLoader().showOverlayOn(view: self.view)
     }
 }
+
 // MARK: - UITableViewDataSource
 // MARK: -
+
 extension MBHomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,13 +79,18 @@ extension MBHomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StringConstants.movieTableCell, for: indexPath) as! MBMovieTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: MBStringConstants.movieTableCell, for: indexPath) as! MBMovieTableCell
         let movie = moviesList[indexPath.row]
         cell.selectionStyle = .none
         configureMovie(movie: movie, forCell: cell)
         return cell
     }
     
+    /**
+     Configure Movie list cell
+     - Parameter movie: movie
+     - Parameter cell: table view cell
+     */
     func configureMovie(movie: MBMovie, forCell cell: MBMovieTableCell) {
         DispatchQueue.global().async {
             do {
@@ -78,18 +101,20 @@ extension MBHomeViewController: UITableViewDataSource {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    cell.movieImageView.image = UIImage.init(named: StringConstants.notFoundIcon)
+                    cell.movieImageView.image = UIImage.init(named: MBStringConstants.notFoundIcon)
                 }
                 print("image processing error: \(error.localizedDescription)")
             }
         }
     }
 }
+
 // MARK: - UITableViewDelegate
 // MARK: -
+
 extension MBHomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return MathConstants.rowHeight
+        return MBMathConstants.rowHeight
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -100,8 +125,10 @@ extension MBHomeViewController: UITableViewDelegate {
             initialView: self)
     }
 }
+
 // MARK: - MBHomeViewPresenterProtocol
 // MARK: -
+
 extension MBHomeViewController: MBHomeViewPresenterProtocol {
     func setFeaturedList(movies: [MBMovie]) {
         self.featuredListView.featuredMoviesList = movies
@@ -115,8 +142,10 @@ extension MBHomeViewController: MBHomeViewPresenterProtocol {
         Utils.showErrorMessage(error: error)
     }
 }
+
 // MARK: - MBMovieHelperProtocol
 // MARK: -
+
 extension MBHomeViewController: MBMovieHelperProtocol {
     func startLoading() {
         DispatchQueue.main.async {
@@ -130,8 +159,10 @@ extension MBHomeViewController: MBMovieHelperProtocol {
         }
     }
 }
+
 // MARK: - MBFeaturedListActionProtocol
 // MARK: -
+
 extension MBHomeViewController: MBFeaturedListActionProtocol {
     func itemSelectedWith(movie: MBMovie?, movieImage: UIImage?) {
         self.movieListPresenter?.showDetailsfor(

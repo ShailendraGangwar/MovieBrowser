@@ -7,14 +7,16 @@
 //
 
 import Foundation
-
+/**
+ MBMovie
+ */
 struct MBMovie: Codable {
     let title: String
     let year: String
     let imdbId: String
     let type: String
     let poster: URL
-    // optional keys
+    /// optional keys
     var plot: String?
     enum CodingKeys: String, CodingKey {
         case title = "Title"
@@ -25,7 +27,9 @@ struct MBMovie: Codable {
         case plot = "Plot"
     }
 }
-
+/**
+ SearchResults
+ */
 struct SearchResults: Codable {
     let search: [MBMovie]
     enum CodingKeys: String, CodingKey {

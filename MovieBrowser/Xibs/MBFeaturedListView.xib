@@ -33,7 +33,7 @@
                     </collectionViewFlowLayout>
                     <cells/>
                 </collectionView>
-                <pageControl opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="Ke1-uY-Azj">
+                <pageControl opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ke1-uY-Azj">
                     <rect key="frame" x="0.0" y="178" width="365" height="20"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                     <constraints>

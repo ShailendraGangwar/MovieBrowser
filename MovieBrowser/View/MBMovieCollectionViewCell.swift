@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ UICollectionViewCell class for Featured Movie list
+ */
 class MBMovieCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var movieImageView: UIImageView!
 }

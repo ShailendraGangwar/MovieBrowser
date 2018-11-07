@@ -8,12 +8,26 @@
 
 import UIKit
 
+/**
+ ## MBFeaturedListView responsible for:
+ - Showing scrollable featured list view
+ */
 class MBFeaturedListView: UIView {
 
+    // MARK: - IBOutlets
+    // MARK: -
+    
+    /// Content view
     @IBOutlet var contentView: UIView!
+    /// Movie collection view
     @IBOutlet weak var movieCollectionView: UICollectionView!
+    /// Page control
     @IBOutlet weak var pageControl: UIPageControl!
-    var scrollingTimer = Timer()
+    
+    // MARK: - Variables
+    // MARK: -
+
+    /// Featured movies list
     var featuredMoviesList = [MBMovie]() {
         didSet {
             DispatchQueue.main.async {
@@ -23,38 +37,67 @@ class MBFeaturedListView: UIView {
             }
         }
     }
+    /// Current visible movie
     private var currentVisibleMovie = 1
-    var movieListPresenter : MBHomeViewPresenter?
+    /// Home view presenter
+    weak var movieListPresenter : MBHomeViewPresenter?
+    /// Delegate for selection of movie
     weak var movieListActionDelegate : MBFeaturedListActionProtocol?
 
+    // MARK: - Initializers
+    // MARK: -
+    
+    /**
+     Initializer
+     - Parameter frame: frame
+     */
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
     
+    /**
+     Initializer
+     - Parameter coder: coder
+     */
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
     
+    // MARK: - Methods
+    // MARK: -
+    
+    /**
+     Common initializer.
+     */
     private func commonInit() {
-        Bundle.main.loadNibNamed("MBFeaturedListView", owner: self, options: nil)
+        Bundle.main.loadNibNamed(MBStringConstants.featuredListView, owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        movieCollectionView.register(UINib(nibName: "MBMovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: StringConstants.movieCollectionViewCell)
+        movieCollectionView.register(UINib(nibName: MBStringConstants.movieCollectionViewCellNib, bundle: nil), forCellWithReuseIdentifier: MBStringConstants.movieCollectionViewCell)
         self.movieCollectionView.delegate = self
         self.movieCollectionView.dataSource = self
     }
     
+    /**
+     Configure Page Control.
+     */
     private func configurePageControl() {
         self.pageControl.numberOfPages = self.featuredMoviesList.count
     }
     
+    /**
+     Setting Timer.
+     */
     private func setTimer() {
-        let _ = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(MBFeaturedListView.autoScroll), userInfo: nil, repeats: true)
+        let _ = Timer.scheduledTimer(timeInterval: MBMathConstants.timerScheduleInterval, target: self, selector: #selector(MBFeaturedListView.autoScroll), userInfo: nil, repeats: true)
     }
     
+    /**
+     Auto scroll to next movie.
+     */
     @objc private func autoScroll() {
         self.pageControl.currentPage = currentVisibleMovie
         if self.currentVisibleMovie < self.featuredMoviesList.count {
@@ -67,11 +110,13 @@ class MBFeaturedListView: UIView {
         }
     }
 }
+
 // MARK: - UICollectionViewDataSource
 // MARK: -
+
 extension MBFeaturedListView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: StringConstants.movieCollectionViewCell, for: indexPath) as! MBMovieCollectionViewCell
+        let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: MBStringConstants.movieCollectionViewCell, for: indexPath) as! MBMovieCollectionViewCell
         let movie = featuredMoviesList[indexPath.row]
         configureFeaturedMovie(movie: movie, forCell: collectionViewCell)
         return collectionViewCell
@@ -85,6 +130,11 @@ extension MBFeaturedListView: UICollectionViewDataSource {
         return featuredMoviesList.count
     }
     
+    /**
+     Configure Featured Movie cell.
+     - Parameter movie: movie.
+     - Parameter cell: Collection view cell
+     */
     func configureFeaturedMovie(movie: MBMovie, forCell cell: MBMovieCollectionViewCell) {
         DispatchQueue.global().async {
             do {
@@ -94,7 +144,7 @@ extension MBFeaturedListView: UICollectionViewDataSource {
                 }
             } catch {
                 DispatchQueue.main.async {
-                    cell.movieImageView.image = UIImage.init(named: StringConstants.notFoundIcon)
+                    cell.movieImageView.image = UIImage.init(named: MBStringConstants.notFoundIcon)
                 }
                 print("image processing error: \(error.localizedDescription)")
             }
@@ -102,19 +152,23 @@ extension MBFeaturedListView: UICollectionViewDataSource {
         cell.backgroundColor = UIColor.lightText
     }
 }
+
 // MARK: - UICollectionViewDelegate
 // MARK: -
+
 extension MBFeaturedListView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentCell = collectionView.cellForItem(at: indexPath) as! MBMovieCollectionViewCell
         self.movieListActionDelegate?.itemSelectedWith(movie: featuredMoviesList[indexPath.row], movieImage: currentCell.movieImageView?.image)
     }
 }
+
 // MARK: - UICollectionViewDelegateFlowLayout
 // MARK: -
+
 extension MBFeaturedListView: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 188)
+        return CGSize(width: UIScreen.main.bounds.width, height: MBMathConstants.itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

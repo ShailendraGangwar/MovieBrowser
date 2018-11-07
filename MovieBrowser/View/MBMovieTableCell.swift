@@ -8,6 +8,9 @@
 
 import UIKit
 
+/**
+ UITableViewCell class for Movie table list
+ */
 class MBMovieTableCell: UITableViewCell {
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var movieImageView: UIImageView!

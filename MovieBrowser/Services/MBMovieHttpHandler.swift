@@ -8,18 +8,25 @@
 
 import Foundation
 
+/**
+ ## MBMovieHttpHandler responsible for:
+ - Creating a url session and making request.
+ */
 class MBMovieHttpHandler {
     
-    static let movieListURL = "http://www.omdbapi.com/?apikey=5335e485&s="
-    static let titleSearchURL = "http://www.omdbapi.com/?apikey=5335e485&t="
-    static let featuredURL = "http://www.omdbapi.com/?apikey=5335e485&y=2018&s="
+    /// Url session
     static let session = URLSession.shared
     
-    static func movieSearch(keyword: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
-        session.dataTask(with: URL(string: "\(movieListURL)\(keyword)")!, completionHandler: { (data, response, error) in
+    /**
+     Get movies list.
+     - Parameter topic: topic to be searched for movies.
+     - Parameter completion: completion block.
+     */
+    static func getMovies(topic: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
+        session.dataTask(with: URL(string: "\(MBUrls.movieListURL)\(topic)")!, completionHandler: { (data, response, error) in
             if let error = error {
                 completion(error, [])
-
+                
             } else if let data = data {
                 do {
                     let decoder = JSONDecoder()
@@ -32,8 +39,13 @@ class MBMovieHttpHandler {
         }).resume()
     }
     
-    static func featureMovieSearch(keyword: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
-        session.dataTask(with: URL(string: "\(featuredURL)\(keyword)")!, completionHandler: { (data, response, error) in
+    /**
+     Get feaatured movies list.
+     - Parameter topic: topic to be searched for movies.
+     - Parameter completion: completion block.
+     */
+    static func getFeatureMovies(topic: String, completion: @escaping (Error?, [MBMovie]?) -> Void) {
+        session.dataTask(with: URL(string: "\(MBUrls.featuredURL)\(topic)")!, completionHandler: { (data, response, error) in
             if let error = error {
                 completion(error, [])
             } else if let data = data {
@@ -48,8 +60,13 @@ class MBMovieHttpHandler {
         }).resume()
     }
     
-    static func titleSearch(keyword: String, completion: @escaping (Error?, MBMovie?) -> Void) {
-        session.dataTask(with: URL(string: "\(titleSearchURL)\(keyword)")!, completionHandler: { (data, response, error) in
+    /**
+     Get movies details.
+     - Parameter movie: movie to be searched.
+     - Parameter completion: completion block.
+     */
+    static func getDetailsFor(movie: String, completion: @escaping (Error?, MBMovie?) -> Void) {
+        session.dataTask(with: URL(string: "\(MBUrls.titleSearchURL)\(movie)")!, completionHandler: { (data, response, error) in
             if let error = error {
                 completion(error, nil)
             } else if let data = data {

@@ -8,26 +8,48 @@
 
 import Foundation
 
+/**
+ ## MBMovieAPIService responsible for:
+ - Getting Movies list
+ - Getting featured movies list
+ - Getting movie details
+ */
 class MBMovieAPIService {
-    
+    /// shared variable
     static let shared = MBMovieAPIService()
     
+    /**
+     Initializer
+     */
     private init() {}
     
-    func movieSearch(keyword: String) {
-        MBMovieHttpHandler.movieSearch(keyword: keyword) { (error, movies) in
+    /**
+     Get movies list.
+     - Parameter topic: Topic to be searched.
+     */
+    func getMoviesList(topic: String) {
+        MBMovieHttpHandler.getMovies(topic: topic) { (error, movies) in
             MBMoviesListDataManager.shared.saveMoviesList(moviesList: movies!, error: error)
         }
     }
     
-    func featureMovieSearch(keyword: String) {
-        MBMovieHttpHandler.featureMovieSearch(keyword: keyword) { (error, movies) in
+    /**
+     Get featured movies list.
+     - Parameter topic: Topic to be searched.
+     */
+    func getfeatureMoviesList(topic: String) {
+        MBMovieHttpHandler.getFeatureMovies(topic: topic) { (error, movies) in
             MBMoviesListDataManager.shared.saveFeaturedList(featuredList: movies!, error: error)
         }
     }
     
-    func titleSearch(keyword: String, completion: @escaping (Error?, MBMovie?) -> Void) {
-        MBMovieHttpHandler.titleSearch(keyword: keyword) { (error, movie) in
+    /**
+     Get details for Movie.
+     - Parameter movieTitle: movie title.
+     - Parameter completion: Completion block.
+     */
+    func getDetailsFor(movieTitle: String, completion: @escaping (Error?, MBMovie?) -> Void) {
+        MBMovieHttpHandler.getDetailsFor(movie: movieTitle) { (error, movie) in
             completion(error, movie)
         }
     }
