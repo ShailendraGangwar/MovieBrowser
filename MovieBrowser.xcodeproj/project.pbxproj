@@ -28,6 +28,9 @@
 		DA8C1A102191DC56001098BB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C1A0F2191DC56001098BB /* Utils.swift */; };
 		DA8C1A132191F3DF001098BB /* MBMovieProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C1A122191F3DF001098BB /* MBMovieProtocols.swift */; };
 		DA8C1A162191FB7E001098BB /* MBHomeViewRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C1A152191FB7E001098BB /* MBHomeViewRouter.swift */; };
+		DA8C1A182192AC5C001098BB /* MBFeaturedListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA8C1A172192AC5C001098BB /* MBFeaturedListView.swift */; };
+		DA8C1A1A2192AC82001098BB /* MBFeaturedListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA8C1A192192AC82001098BB /* MBFeaturedListView.xib */; };
+		DA8C1A1D2192BAF6001098BB /* MBMovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA8C1A1B2192B20D001098BB /* MBMovieCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +78,9 @@
 		DA8C1A0F2191DC56001098BB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		DA8C1A122191F3DF001098BB /* MBMovieProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBMovieProtocols.swift; sourceTree = "<group>"; };
 		DA8C1A152191FB7E001098BB /* MBHomeViewRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBHomeViewRouter.swift; sourceTree = "<group>"; };
+		DA8C1A172192AC5C001098BB /* MBFeaturedListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBFeaturedListView.swift; sourceTree = "<group>"; };
+		DA8C1A192192AC82001098BB /* MBFeaturedListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MBFeaturedListView.xib; sourceTree = "<group>"; };
+		DA8C1A1B2192B20D001098BB /* MBMovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MBMovieCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,20 +131,19 @@
 		DA8C19BD2190396E001098BB /* MovieBrowser */ = {
 			isa = PBXGroup;
 			children = (
-				DA8C1A142191FAFB001098BB /* Router */,
-				DA8C1A112191F3B9001098BB /* Protocols */,
-				DA8C1A0E2191DC39001098BB /* Utils */,
-				DA8C19FD2190BA28001098BB /* Presenter */,
+				DA8C1A202192C9F0001098BB /* AppDelegate */,
 				DA8C19F82190A4C5001098BB /* Constants */,
-				DA8C19EF219039FC001098BB /* View Controllers */,
-				DA8C19EE219039F6001098BB /* View */,
-				DA8C19ED219039EC001098BB /* Services */,
-				DA8C19EC219039E5001098BB /* Model */,
-				DA8C19BE2190396E001098BB /* AppDelegate.swift */,
-				DA8C19C22190396E001098BB /* Main.storyboard */,
-				DA8C19C52190396F001098BB /* Assets.xcassets */,
-				DA8C19C72190396F001098BB /* LaunchScreen.storyboard */,
 				DA8C19CA2190396F001098BB /* Info.plist */,
+				DA8C19EC219039E5001098BB /* Model */,
+				DA8C19FD2190BA28001098BB /* Presenter */,
+				DA8C1A112191F3B9001098BB /* Protocols */,
+				DA8C1A142191FAFB001098BB /* Router */,
+				DA8C19ED219039EC001098BB /* Services */,
+				DA8C1A212192CA11001098BB /* Supporting Files */,
+				DA8C1A0E2191DC39001098BB /* Utils */,
+				DA8C19EE219039F6001098BB /* View */,
+				DA8C19EF219039FC001098BB /* View Controllers */,
+				DA8C1A1F2192C90F001098BB /* Xibs */,
 			);
 			path = MovieBrowser;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				DA8C19F0219088C0001098BB /* MBMovieTableCell.swift */,
 				DA8C19FB2190B7A3001098BB /* MBLoader.swift */,
 				DA8C1A052190DE8D001098BB /* MBMovieCollectionViewCell.swift */,
+				DA8C1A172192AC5C001098BB /* MBFeaturedListView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -237,6 +243,33 @@
 				DA8C1A152191FB7E001098BB /* MBHomeViewRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		DA8C1A1F2192C90F001098BB /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				DA8C1A192192AC82001098BB /* MBFeaturedListView.xib */,
+				DA8C1A1B2192B20D001098BB /* MBMovieCollectionViewCell.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		DA8C1A202192C9F0001098BB /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				DA8C19BE2190396E001098BB /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		DA8C1A212192CA11001098BB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DA8C19C72190396F001098BB /* LaunchScreen.storyboard */,
+				DA8C19C22190396E001098BB /* Main.storyboard */,
+				DA8C19C52190396F001098BB /* Assets.xcassets */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -344,6 +377,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA8C19C92190396F001098BB /* LaunchScreen.storyboard in Resources */,
+				DA8C1A1D2192BAF6001098BB /* MBMovieCollectionViewCell.xib in Resources */,
+				DA8C1A1A2192AC82001098BB /* MBFeaturedListView.xib in Resources */,
 				DA8C19C62190396F001098BB /* Assets.xcassets in Resources */,
 				DA8C19C42190396E001098BB /* Main.storyboard in Resources */,
 			);
@@ -386,6 +421,7 @@
 				DA8C19FF2190BA89001098BB /* MBHomeViewPresenter.swift in Sources */,
 				DA8C1A0D2191683B001098BB /* MBMovieHttpHandler.swift in Sources */,
 				DA8C1A042190C258001098BB /* MBMoviesListDataManager.swift in Sources */,
+				DA8C1A182192AC5C001098BB /* MBFeaturedListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

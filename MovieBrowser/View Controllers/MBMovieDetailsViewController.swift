@@ -57,7 +57,7 @@ class MBDetailsViewController: UIViewController {
                     }
                 } catch {
                     DispatchQueue.main.async {
-                        self.imageView.image = UIImage.init(named: "error_icon")
+                        self.imageView.image = UIImage.init(named: StringConstants.notFoundIcon)
                     }
                     print("image processing error: \(error.localizedDescription)")
                 }
@@ -83,9 +83,7 @@ class MBDetailsViewController: UIViewController {
 
 // MARK: - MBHomeViewPresenterProtocol
 // MARK: -
-
 extension MBDetailsViewController: MBMovieDetailsPresenterProtocol {
-
     func setMovie(movie: MBMovie) {
         self.configureView(movie: movie)
     }
@@ -97,7 +95,6 @@ extension MBDetailsViewController: MBMovieDetailsPresenterProtocol {
 
 // MARK: - MBMovieHelperProtocol
 // MARK: -
-
 extension MBDetailsViewController: MBMovieHelperProtocol {
     func startLoading() {
         DispatchQueue.main.async {
@@ -111,6 +108,3 @@ extension MBDetailsViewController: MBMovieHelperProtocol {
         }
     }
 }
-
-
-

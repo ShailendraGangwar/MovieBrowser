@@ -31,7 +31,6 @@ class MBLoader {
         self.activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
         self.activityIndicator.center = CGPoint(x: overlayView.bounds.width / 2, y: overlayView.bounds.height / 2)
-        
         self.overlayView.addSubview(activityIndicator)
         view.addSubview(overlayView)
         self.activityIndicator.startAnimating()

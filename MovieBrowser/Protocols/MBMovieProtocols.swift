@@ -40,3 +40,9 @@ protocol MBRouterProtocol: class {
     static func attachHomePresenter(homeView: MBHomeViewController)
 
 }
+
+protocol MBFeaturedListActionProtocol: class {
+    
+    func itemSelectedWith(movie: MBMovie?, movieImage: UIImage?)
+    
+}

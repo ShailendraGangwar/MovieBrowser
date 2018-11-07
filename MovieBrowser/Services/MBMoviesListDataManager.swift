@@ -18,7 +18,6 @@ class MBMoviesListDataManager: NSObject {
     public var moviesList = [MBMovie]()
     public var featuredList = [MBMovie]()
     weak var moviesListUpdateDelegate: MBMoviesUpdateDelegate?
-    
     static let shared = MBMoviesListDataManager()
     
     private override init(){}

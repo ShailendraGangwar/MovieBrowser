@@ -17,7 +17,7 @@ enum MBAppStoryboard: String {
 }
 
 enum MathConstants {
-    static let rowHeight: CGFloat  = 70
+    static let rowHeight: CGFloat  = 66
     static let overlayViewTag: Int = 2222
 }
 
@@ -32,4 +32,5 @@ struct StringConstants {
     static let ok = "OK"
     static let movieListTopic = "love"
     static let featuredListTopic = "war"
+    static let notFoundIcon = "not_found_icon"
 }

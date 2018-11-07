@@ -11,7 +11,7 @@ import Foundation
 class MBMovieAPIService {
     
     static let shared = MBMovieAPIService()
-
+    
     private init() {}
     
     func movieSearch(keyword: String) {

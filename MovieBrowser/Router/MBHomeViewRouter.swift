@@ -26,5 +26,4 @@ class MBHomeViewRouter: MBRouterProtocol {
         homeView.movieListPresenter?.homeViewHelper = homeView
         homeView.movieListPresenter?.homeViewPresenter = homeView
     }
-
 }
